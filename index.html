@@ -29,8 +29,10 @@
             background-color: #0c0a09;
             color: #f5f5f4;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow: hidden;
-            height: 100vh;
+            overflow-x: hidden;
+            /* Allow vertical scrolling on mobile if content is tall */
+            overflow-y: auto;
+            min-height: 100vh;
         }
 
         h1, h2, h3 {
@@ -48,6 +50,7 @@
             overflow: hidden;
             filter: blur(80px);
             opacity: 0.6;
+            pointer-events: none;
         }
 
         .aurora-blob {
@@ -73,13 +76,22 @@
         }
 
         .step-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            position: relative;
+            margin: 6rem auto 4rem auto;
             width: 90%;
             max-width: 600px;
             z-index: 10;
+        }
+
+        /* Center steps vertically when possible */
+        @media (min-height: 700px) {
+            .step-container {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                margin: 0;
+            }
         }
 
         .hidden-step {
@@ -107,10 +119,10 @@
 
         .progress-bar-container {
             position: fixed;
-            top: 2rem;
+            top: 1.5rem;
             left: 50%;
             transform: translateX(-50%);
-            width: 200px;
+            width: 160px;
             height: 4px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
@@ -157,11 +169,11 @@
         
         <!-- Step 1: Welcome -->
         <div id="step-1" class="step-content">
-            <div class="glass-card p-8 md:p-12 rounded-3xl text-center space-y-6">
-                <div class="text-6xl animate-pulse">❤️</div>
-                <h1 class="text-4xl md:text-5xl font-bold gradient-text">Hey Kriti 👀💖</h1>
-                <p class="text-lg text-stone-300 leading-relaxed">
-                    Sun… normal birthday wish mujhe thoda boring laga. <br>
+            <div class="glass-card p-6 md:p-12 rounded-3xl text-center space-y-6">
+                <div class="text-5xl md:text-6xl animate-pulse">❤️</div>
+                <h1 class="text-3xl md:text-5xl font-bold gradient-text">Hey Kriti 👀💖</h1>
+                <p class="text-base md:text-lg text-stone-300 leading-relaxed">
+                    Sun… normal birthday wish mujhe thoda boring laga. <br class="hidden md:block">
                     Toh socha — kuch alag karte hain. <br>
                     Yeh ek chhota sa digital surprise… sirf tere liye 😌
                 </p>
@@ -173,14 +185,14 @@
 
         <!-- Step 2: Birthday Vibes -->
         <div id="step-2" class="step-content hidden-step">
-            <div class="glass-card p-8 md:p-12 rounded-3xl text-center space-y-6">
-                <div class="text-6xl">🎉</div>
-                <h2 class="text-4xl font-bold gradient-text">Happy Birthday, Legend 🥳</h2>
-                <p class="text-lg text-stone-300">
+            <div class="glass-card p-6 md:p-12 rounded-3xl text-center space-y-6">
+                <div class="text-5xl md:text-6xl">🎉</div>
+                <h2 class="text-3xl md:text-4xl font-bold gradient-text">Happy Birthday, Legend 🥳</h2>
+                <p class="text-base md:text-lg text-stone-300">
                     Ek aur saal bada hona matlab:<br>
                     aur zyada stories, aur zyada hasi, <br>
                     aur obviously aur zyada drama — mere saath 😏<br>
-                    <span class="block mt-4 italic">Sach bolun toh… world thoda better lagta hai jab tu aas-paas hoti hai.</span>
+                    <span class="block mt-4 italic text-sm md:text-base">Sach bolun toh… world thoda better lagta hai jab tu aas-paas hoti hai.</span>
                 </p>
                 <button onclick="nextStep(3)" class="btn-primary px-8 py-3 rounded-full font-semibold text-white">
                     Aage Kya Hai 👀
@@ -188,36 +200,35 @@
             </div>
         </div>
 
-        <!-- Step 3: Bento Grid (Updated) -->
+        <!-- Step 3: Bento Grid Optimized -->
         <div id="step-3" class="step-content hidden-step">
-            <div class="space-y-6">
-                <h2 class="text-3xl font-bold text-center gradient-text mb-4">Kriti, Tu Itni Special Kyun Hai 💖</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-4 md:space-y-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-center gradient-text mb-2">Kriti, Tu Itni Special Kyun Hai 💖</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                     <!-- Card 1 (Large) -->
-                    <div class="glass-card p-6 rounded-2xl md:col-span-2">
-                        <h3 class="text-pink-300 font-bold mb-2">🌱 Tu Meri Change Ki Wajah Hai</h3>
+                    <div class="glass-card p-5 md:p-6 rounded-2xl md:col-span-2">
+                        <h3 class="text-pink-300 font-bold mb-2 flex items-center gap-2">🌱 <span>Tu Meri Change Ki Wajah Hai</span></h3>
                         <p class="text-sm text-stone-300 leading-relaxed">
                             Main introvert hoon, zyada bolta nahi tha. Par online hi sahi, tere saath baat karte-karte main zyada open hone laga. <br><br>
                             Aur tere vajah se hi maine khud ko pehchan paya hai.
                         </p>
                     </div>
                     <!-- Card 2 (Small) -->
-                    <div class="glass-card p-6 rounded-2xl">
-                        <h3 class="text-pink-300 font-bold mb-2">😂 Humara Khatarnak Humor</h3>
+                    <div class="glass-card p-5 md:p-6 rounded-2xl">
+                        <h3 class="text-pink-300 font-bold mb-2 flex items-center gap-2">😂 <span>Humara Humor</span></h3>
                         <p class="text-sm text-stone-300">
                             Humara humor thoda dangerous hai 😭 jo sirf ham dono hi samjh sakte hai aur mai to kabhi kabhi achanak soch ke smile karne lag jata hu.
                         </p>
                     </div>
-                    <!-- Card 3 (Large) -->
-                    <div class="glass-card p-6 rounded-2xl">
-                        <h3 class="text-pink-300 font-bold mb-2">🫶 Humari Understanding</h3>
+                    <!-- Card 3 (Small on Desktop, Full on Mobile) -->
+                    <div class="glass-card p-5 md:p-6 rounded-2xl">
+                        <h3 class="text-pink-300 font-bold mb-2 flex items-center gap-2">🫶 <span>Understanding</span></h3>
                         <p class="text-sm text-stone-300">
-                            Sirf online hone ke bawajood, kabhi-kabhi bina bole hi samajh aa jaata hai ki saamne wala kya feel kar raha hai. <br><br>
-                            And that’s rare.
+                            Sirf online hone ke bawajood, kabhi-kabhi bina bole hi samajh aa jaata hai ki saamne wala kya feel kar raha hai. And that’s rare.
                         </p>
                     </div>
                 </div>
-                <div class="flex justify-center mt-6">
+                <div class="flex justify-center pt-2">
                     <button onclick="nextStep(4)" class="btn-primary px-8 py-3 rounded-full font-semibold text-white">
                         Yeh Wali Baat Special Hai 😌
                     </button>
@@ -227,18 +238,20 @@
 
         <!-- Step 4: Iconic Memory -->
         <div id="step-4" class="step-content hidden-step">
-            <div class="glass-card p-8 md:p-12 rounded-3xl text-center space-y-6 border-pink-500/20">
-                <div class="text-5xl">🤐💊😭</div>
-                <h2 class="text-3xl font-bold gradient-text">Aur Phir Woh Ek Scene…</h2>
-                <p class="text-lg text-stone-300 italic">
-                    "Sun na… medical shop se ek cheez le aayega?"
-                </p>
-                <p class="text-stone-400 text-sm leading-relaxed">
-                    Mujhe laga hi tha ki kuch khatarnak hone wala hai … aur jo tune bola, aur fir mai bhi piche nahi hata, aur jo hamne masti kiya us din — <span class="text-white font-bold">ICONIC MEMORY</span> ban gayi 😂
-                    <br><br>
-                    Naam nahi lenge, par hum dono jaante hain 😭💀
-                </p>
-                <p class="text-xs text-stone-500">Some memories don’t need photos… bas dimaag mein permanent saved hoti hain.</p>
+            <div class="glass-card p-6 md:p-12 rounded-3xl text-center space-y-6 border-pink-500/20">
+                <div class="text-4xl md:text-5xl">🤐💊😭</div>
+                <h2 class="text-2xl md:text-3xl font-bold gradient-text">Aur Phir Woh Ek Scene…</h2>
+                <div class="space-y-4">
+                    <p class="text-base md:text-lg text-stone-300 italic px-2">
+                        "Sun na… medical shop se ek cheez le aayega?"
+                    </p>
+                    <p class="text-stone-400 text-sm md:text-base leading-relaxed">
+                        Mujhe laga hi tha ki kuch khatarnak hone wala hai … aur jo tune bola, aur fir mai bhi piche nahi hata, aur jo hamne masti kiya us din — <span class="text-white font-bold">ICONIC MEMORY</span> ban gayi 😂
+                        <br><br>
+                        Naam nahi lenge, par hum dono jaante hain 😭💀
+                    </p>
+                </div>
+                <p class="text-[10px] md:text-xs text-stone-500">Some memories don’t need photos… bas dimaag mein permanent saved hoti hain.</p>
                 <button onclick="nextStep(5)" class="btn-primary px-8 py-3 rounded-full font-semibold text-white">
                     Bas Ek Last Cheez…
                 </button>
@@ -247,18 +260,18 @@
 
         <!-- Step 5: Finale -->
         <div id="step-5" class="step-content hidden-step">
-            <div class="glass-card p-8 md:p-12 rounded-3xl text-center space-y-6">
-                <div class="text-6xl" id="finale-icon">🎂</div>
-                <h2 class="text-4xl font-bold gradient-text">Kriti, This Is For You 💖</h2>
-                <p id="finale-text" class="text-lg text-stone-300">
+            <div class="glass-card p-6 md:p-12 rounded-3xl text-center space-y-6">
+                <div class="text-5xl md:text-6xl" id="finale-icon">🎂</div>
+                <h2 class="text-3xl md:text-4xl font-bold gradient-text">Kriti, This Is For You 💖</h2>
+                <p id="finale-text" class="text-base md:text-lg text-stone-300 leading-relaxed">
                     Iss saal tujhe: zyada clarity mile, zyada confidence mile, aur kam stress mile (thoda drama toh rahega 😌).
                     <br><br>
                     Tu genuinely deserve karti hai sab achha — aur haan, main hamesha side mein hoon.
                 </p>
-                <div id="finale-reveal" class="hidden opacity-0 text-2xl font-bold text-pink-400 mt-4">
+                <div id="finale-reveal" class="hidden opacity-0 text-xl md:text-2xl font-bold text-pink-400 mt-4">
                     Happy Birthday, Kriti 💖 <br> <span class="text-sm">Best Friend Forever</span>
                 </div>
-                <button id="celebrate-btn" onclick="triggerFinale()" class="btn-primary px-8 py-4 rounded-full font-bold text-white text-lg tracking-wide uppercase">
+                <button id="celebrate-btn" onclick="triggerFinale()" class="btn-primary w-full md:w-auto px-8 py-4 rounded-full font-bold text-white text-lg tracking-wide uppercase">
                     Celebrate Kar 😌✨
                 </button>
             </div>
@@ -275,7 +288,7 @@
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas'), alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limit pixel ratio for performance
 
         // Heart Shape Generator
         const heartShape = new THREE.Shape();
@@ -290,16 +303,17 @@
         const material = new THREE.MeshPhongMaterial({ color: 0xff4d6d, shininess: 100 });
 
         const hearts = [];
-        for (let i = 0; i < 25; i++) {
+        const heartCount = window.innerWidth < 768 ? 15 : 25; // Fewer hearts on mobile
+        for (let i = 0; i < heartCount; i++) {
             const heart = new THREE.Mesh(geometry, material);
             heart.position.set((Math.random() - 0.5) * 15, (Math.random() - 0.5) * 15, (Math.random() - 0.5) * 10);
             heart.rotation.x = Math.random() * Math.PI;
             heart.rotation.y = Math.random() * Math.PI;
-            heart.scale.set(0.2, 0.2, 0.2);
+            heart.scale.set(0.15, 0.15, 0.15);
             scene.add(heart);
             hearts.push({
                 mesh: heart,
-                speed: 0.005 + Math.random() * 0.01,
+                speed: 0.003 + Math.random() * 0.007,
                 rotSpeed: 0.01 + Math.random() * 0.02
             });
         }
@@ -333,18 +347,21 @@
             const currentEl = document.getElementById(`step-${currentStep}`);
             const nextEl = document.getElementById(`step-${step}`);
 
+            // Reset scroll position when moving to next step
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
             gsap.to(currentEl, {
                 opacity: 0,
                 y: -30,
                 scale: 0.95,
-                duration: 0.6,
+                duration: 0.5,
                 ease: "power2.inOut",
                 onComplete: () => {
                     currentEl.style.display = 'none';
                     nextEl.style.display = 'block';
                     gsap.fromTo(nextEl, 
                         { opacity: 0, y: 30, scale: 0.95 },
-                        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.7)" }
+                        { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: "back.out(1.2)" }
                     );
                     currentStep = step;
                     updateProgress();
@@ -375,11 +392,9 @@
             reveal.classList.remove('hidden');
             gsap.to(reveal, { opacity: 1, y: 0, duration: 1, delay: 0.5 });
 
-            // Confetti Blast - Multi-burst approach
-            const count = 200;
-            const defaults = {
-                origin: { y: 0.7 }
-            };
+            // Confetti Blast
+            const count = window.innerWidth < 768 ? 100 : 200;
+            const defaults = { origin: { y: 0.7 } };
 
             function fire(particleRatio, opts) {
                 confetti({
@@ -389,38 +404,18 @@
                 });
             }
 
-            fire(0.25, {
-                spread: 26,
-                startVelocity: 55,
-                colors: ['#ec4899', '#ffffff']
-            });
-            fire(0.2, {
-                spread: 60,
-                colors: ['#ff0000', '#f9a8d4']
-            });
-            fire(0.35, {
-                spread: 100,
-                decay: 0.91,
-                scalar: 0.8,
-                colors: ['#ec4899', '#ffffff', '#ef4444']
-            });
-            fire(0.1, {
-                spread: 120,
-                startVelocity: 25,
-                decay: 0.92,
-                scalar: 1.2
-            });
-            fire(0.1, {
-                spread: 120,
-                startVelocity: 45,
-            });
+            fire(0.25, { spread: 26, startVelocity: 55, colors: ['#ec4899', '#ffffff'] });
+            fire(0.2, { spread: 60, colors: ['#ff0000', '#f9a8d4'] });
+            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8, colors: ['#ec4899', '#ffffff', '#ef4444'] });
+            fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+            fire(0.1, { spread: 120, startVelocity: 45 });
 
             // 3D Hearts Swirl
             hearts.forEach(h => {
                 gsap.to(h.mesh.position, {
-                    x: (Math.random() - 0.5) * 50,
-                    y: 20,
-                    z: (Math.random() - 0.5) * 20,
+                    x: (Math.random() - 0.5) * 40,
+                    y: 15,
+                    z: (Math.random() - 0.5) * 15,
                     duration: 4,
                     ease: "power1.in"
                 });
@@ -431,7 +426,7 @@
 
         // Initialize first step visibility
         window.onload = () => {
-            gsap.from('#step-1', { opacity: 0, y: 40, duration: 1.2, ease: "power4.out" });
+            gsap.from('#step-1', { opacity: 0, y: 40, duration: 1, ease: "power4.out" });
         };
     </script>
 </body>
