@@ -29,7 +29,6 @@
             background-color: #0c0a09;
             color: #f5f5f4;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            /* Changed to min-height and allowed scroll for mobile browsers like Instagram */
             min-height: 100vh;
             min-height: 100dvh; 
             overflow-x: hidden;
@@ -76,7 +75,6 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
-        /* centering wrapper */
         .main-wrapper {
             display: flex;
             align-items: center;
@@ -148,10 +146,8 @@
 </head>
 <body>
 
-    <!-- Three.js Canvas -->
     <canvas id="three-canvas"></canvas>
 
-    <!-- Aurora Background -->
     <div class="aurora-container">
         <div class="aurora-blob" style="background: var(--aurora-1); top: -10%; left: -10%;"></div>
         <div class="aurora-blob" style="background: var(--aurora-2); top: 40%; right: -10%; animation-duration: 30s;"></div>
@@ -159,12 +155,10 @@
         <div class="aurora-blob" style="background: var(--aurora-4); top: 10%; left: 40%; animation-duration: 35s;"></div>
     </div>
 
-    <!-- Progress Bar -->
     <div class="progress-bar-container glass-card">
         <div id="progress-fill"></div>
     </div>
 
-    <!-- Main Experience Wrapper -->
     <div class="main-wrapper">
         <div class="step-container">
             
@@ -201,30 +195,23 @@
                 </div>
             </div>
 
-            <!-- Step 3: Updated Bento Grid -->
+            <!-- Step 3: Updated Bento Grid (Humor box removed) -->
             <div id="step-3" class="step-content hidden-step">
                 <div class="space-y-6">
                     <h2 class="text-3xl font-bold text-center gradient-text mb-4">Kriti, Tu Itni Special Kyun Hai 💖</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <!-- Card 1: Large -->
-                        <div class="glass-card p-6 md:p-8 rounded-2xl md:col-span-2 border-l-4 border-pink-500">
-                            <h3 class="text-pink-300 text-xl font-bold mb-3">🌱 Tu Meri Change Ki Wajah Hai</h3>
-                            <p class="text-stone-300 leading-relaxed text-sm md:text-base">
+                    <div class="flex justify-center">
+                        <!-- Main Card -->
+                        <div class="glass-card p-8 md:p-10 rounded-2xl border-l-4 border-pink-500 max-w-lg w-full">
+                            <h3 class="text-pink-300 text-xl font-bold mb-4">🌱 Tu Meri Change Ki Wajah Hai</h3>
+                            <p class="text-stone-300 leading-relaxed text-base md:text-lg">
                                 “Main introvert hoon, zyada bolta nahi tha. 
                                 Par online hi sahi, tere saath baat karte-karte main zyada open hone laga.
                                 <br><br>
                                 Aur tere vajah se hi maine khud ko pehchan paya hai.”
                             </p>
                         </div>
-                        <!-- Card 2: Small -->
-                        <div class="glass-card p-6 rounded-2xl md:col-span-2 border-l-4 border-red-500">
-                            <h3 class="text-pink-300 text-xl font-bold mb-3">😂 Humara Khatarnak Humor</h3>
-                            <p class="text-stone-300 leading-relaxed text-sm md:text-base">
-                                “Humara humor thoda dangerous hai 😭 jo sirf ham dono hi samjh sakte hai aur mai to kabhi kabhi achanak soch ke smile karne lag jata hu.”
-                            </p>
-                        </div>
                     </div>
-                    <div class="flex justify-center mt-6">
+                    <div class="flex justify-center mt-8">
                         <button onclick="nextStep(4)" class="btn-primary px-8 py-3 rounded-full font-semibold text-white">
                             Yeh Wali Baat Special Hai 😌
                         </button>
@@ -278,7 +265,6 @@
         let currentStep = 1;
         const totalSteps = 5;
 
-        // --- Three.js Setup ---
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas'), alpha: true, antialias: true });
@@ -330,7 +316,6 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // --- Navigation Logic ---
         function nextStep(step) {
             const currentEl = document.getElementById(`step-${currentStep}`);
             const nextEl = document.getElementById(`step-${step}`);
@@ -342,7 +327,7 @@
                 onComplete: () => {
                     currentEl.style.display = 'none';
                     nextEl.style.display = 'block';
-                    window.scrollTo({ top: 0, behavior: 'smooth' }); // Reset scroll position for new steps
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                     gsap.fromTo(nextEl, 
                         { opacity: 0, y: 30 },
                         { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
